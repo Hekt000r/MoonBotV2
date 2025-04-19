@@ -8,6 +8,7 @@
 /* Imports */
 import mineflayer = require("mineflayer");
 import { Logger } from "./logger";
+import { login } from "./loginHandler";
 
 const fs = require(`fs`);
 require(`dotenv`).config();
@@ -30,11 +31,19 @@ function setupMessageHandlers(bot: Bot) {
   bot.on("message", async (msgJson) => {
     const message = msgJson.toString(); // Since the message is given in JSON, convert it into a string.
     if (
-      message === "Server restarts in 5s" ||
-      "The main server is restarting. We will be back soon! Join our Discord with /discord command in the meantime."
+      message ===
+      `${bot.username}, please login with the command: /login <password>`
     ) {
-      logger.log("Server is restarting, disconnecting bot.")
-      isRestarting = true
+      login(bot);
+    }
+
+    if (
+      message === "Server restarts in 5s" ||
+      message ===
+        "The main server is restarting. We will be back soon! Join our Discord with /discord command in the meantime."
+    ) {
+      logger.log("Server is restarting, disconnecting bot.");
+      isRestarting = true;
       bot.end("Server restart");
     }
   });
@@ -51,6 +60,7 @@ function initalizeBot() {
 
   bot.on("login", () => {
     logger.log(`Bot joined server as ${bot.username}`);
+    setupMessageHandlers(bot);
   });
   bot.on("end", () => {
     logger.log("Disconnected");
