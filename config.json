@@ -1,3 +1,5 @@
 {
-    "restartTimeout": 300000 // Time before reconnecting to server after restart (in milliseconds)
+    "restartTimeout": 300000,
+    "reconnectTimeout": 5000,
+    "minecraftUsername": "555Amazon1"
 }
