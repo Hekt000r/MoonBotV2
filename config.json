@@ -1,0 +1,3 @@
+{
+    "restartTimeout": 300000 // Time before reconnecting to server after restart (in milliseconds)
+}
