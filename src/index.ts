@@ -1,14 +1,13 @@
-/*
-    Moonbot v2 index.ts
-
-    The file that contains all the core logic, namely connecting, and reconnecting.
-
-*/
+/*********************
+ * index.ts
+ * The file that contains all the core logic, namely connecting, and reconnecting.
+ *********************/
 
 /* Imports */
 import mineflayer = require("mineflayer");
 import { Logger } from "./logger";
-import { login } from "./loginHandler";
+import { setupMessageHandlers } from "./messageHandler";
+
 
 const fs = require(`fs`);
 require(`dotenv`).config();
@@ -17,39 +16,19 @@ import type { Bot } from "mineflayer";
 
 /* Variables */
 let bot: Bot;
-let isRestarting = false;
+export let isRestarting: boolean;
 
 const config = JSON.parse(fs.readFileSync("./config.json", "utf-8"));
 const logger = new Logger();
 
-/* Message handler 
-  Handles in-game messages that often relate to TPA's, whispers, login, etc.
-***************************************************************************/
-
-/* SetupMessageHandlers - Handles all messages in game chat for bot. */
-function setupMessageHandlers(bot: Bot) {
-  bot.on("message", async (msgJson) => {
-    const message = msgJson.toString(); // Since the message is given in JSON, convert it into a string.
-    if (
-      message ===
-      `${bot.username}, please login with the command: /login <password>`
-    ) {
-      login(bot);
-    }
-
-    if (
-      message === "Server restarts in 5s" ||
-      message ===
-        "The main server is restarting. We will be back soon! Join our Discord with /discord command in the meantime."
-    ) {
-      logger.log("Server is restarting, disconnecting bot.");
-      isRestarting = true;
-      bot.end("Server restart");
-    }
-  });
+/**************
+ * setIsRestarting()
+ * Basically a hook, is required to change the value of isRestarting as it is an export.
+ **************/
+export function setIsRestarting(value: boolean) {
+  isRestarting = value
 }
 
-/***************************************************************************/
 
 function initalizeBot() {
   bot = mineflayer.createBot({
