@@ -1,5 +1,6 @@
 {
     "restartTimeout": 300000,
     "reconnectTimeout": 5000,
-    "minecraftUsername": "555Amazon1"
+    "minecraftUsername": "Hekt0r44566",
+    "tpaWhitelist": ["Hekt0r44566", "555Amazon1"]
 }

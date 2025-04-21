@@ -64,4 +64,4 @@ function initalizeBot() {
   });
   return bot;
 }
-initalizeBot();
+bot = initalizeBot();
