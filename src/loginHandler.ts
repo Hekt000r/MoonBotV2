@@ -9,6 +9,7 @@ import { Logger } from "./logger"
 import { Movements, goals, pathfinder } from "mineflayer-pathfinder"
 import MinecraftData from "minecraft-data"
 import { Vec3 } from "vec3"
+import { takeKits } from "./takeKits"
 
 require(`dotenv`).config()
 
@@ -38,11 +39,11 @@ function navigateToPortal(bot: Bot) {
 
     bot.once("goal_reached", (goal) => {
         if (
-            goal.x == destination.x && /* */
+            goal.x == destination.x  && /* */
             goal.y == destination.y && /* Make sure bot has gone through the portal */
             goal.z == destination.z    /* */
         ) {
-            logger.log(`${bot.username} has passed through authentication.`)  
+            logger.log(`${bot.username} has passed through authentication.`) 
         }
     })
 }

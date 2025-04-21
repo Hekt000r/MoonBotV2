@@ -13,6 +13,8 @@ const fs = require(`fs`);
 require(`dotenv`).config();
 /* Type imports */
 import type { Bot } from "mineflayer";
+import { takeKits } from "./takeKits";
+import { setupExpressRoutes } from "./routeHandler";
 
 /* Variables */
 let bot: Bot;
@@ -40,6 +42,7 @@ function initalizeBot() {
   bot.on("login", () => {
     logger.log(`Bot joined server as ${bot.username}`);
     setupMessageHandlers(bot);
+    setupExpressRoutes(bot)
   });
   bot.on("end", () => {
     logger.log("Disconnected");
@@ -65,3 +68,4 @@ function initalizeBot() {
   return bot;
 }
 bot = initalizeBot();
+
