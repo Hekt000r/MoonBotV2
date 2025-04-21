@@ -68,6 +68,24 @@ export function setupExpressRoutes(bot: Bot) {
       res.status(500).send(`Failed to order kits`);
     }
   });
+  app.get(`/kitBotMultiKit`, async (req: Request, res: Response) => {
+    try {
+        const kit = req.query.kit
+        const quantity = Number(req.query.quantity)
+        const username = req.query.username
+
+        if (typeof kit !== `string`) return;
+        if (typeof quantity !== `number`) return;
+        if (typeof username !== `string`) return;
+        
+
+        await kitBotMultiKit(kit, username, quantity, bot)
+        res.status(200).send("success")
+    } catch (error) {
+        res.status(500).send("Error")
+        return
+    }
+  })
   app.get(`/kitBotMultiKitType`, async (req: Request, res: Response) => {
     /* "kitbot" mode multi-kittype delivery (sends order and delivers multiple types of kits in one api endpoint) */
     /* Complicated code, needs seperate documentation. */
@@ -104,6 +122,6 @@ export function setupExpressRoutes(bot: Bot) {
     const input = req.query.input
     if (typeof input !== "string") return;
     logger.log(input)
-    res.status(200).send(`${ (await getArrayFromRequest(input)).choices[0].message.content}`);
+    res.send(`${ (await getArrayFromRequest(input)).choices[0].message.content}`);
   });
 }

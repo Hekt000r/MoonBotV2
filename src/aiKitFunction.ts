@@ -15,7 +15,7 @@ export async function getArrayFromRequest(input: string) {
         messages: [
             {
                 role: "system",
-                content: "Based on the user request, return an array in this format: ['kitName,kitQuantity', 'anotherKit,kitQuantity]' and do not output ANYTHING ELSE."
+                content: 'Based on the user request, return an array in this format: ["kitName,kitQuantity", "anotherKit,kitQuantity"] , and do not output ANYTHING ELSE.'
             }, {
                 role: "user",
                 content: `get ${input}`
