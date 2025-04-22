@@ -4,6 +4,8 @@
  * ***************************/
 
 /* Imports */
+require(`dotenv`).config()
+
 import { Bot } from "mineflayer"
 import { Logger } from "./logger"
 import { Movements, goals, pathfinder } from "mineflayer-pathfinder"
@@ -11,7 +13,7 @@ import MinecraftData from "minecraft-data"
 import { Vec3 } from "vec3"
 import { takeKits } from "./takeKits"
 
-require(`dotenv`).config()
+
 
 const minecraftPassword = process.env.minecraftPassword
 const logger = new Logger()

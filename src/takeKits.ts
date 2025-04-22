@@ -4,10 +4,11 @@
  *************/
 
 /* Imports */
+require(`dotenv`).config()
+
 import { Vec3 } from "vec3"
 import { Logger } from "./logger"
 
-require(`dotenv`).config() /* This single line of code costed me serveral PAINFUL hours of debugging. */
 /* Type Imports */
 import { Bot } from "mineflayer"
 

@@ -4,13 +4,15 @@
  *********************/
 
 /* Imports */
+require(`dotenv`).config();
+
 import mineflayer = require("mineflayer");
 import { Logger } from "./logger";
 import { setupMessageHandlers } from "./messageHandler";
 
 
 const fs = require(`fs`);
-require(`dotenv`).config();
+
 /* Type imports */
 import type { Bot } from "mineflayer";
 import { takeKits } from "./takeKits";
