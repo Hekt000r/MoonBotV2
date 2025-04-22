@@ -42,7 +42,6 @@ function initalizeBot() {
   bot.on("login", () => {
     logger.log(`Bot joined server as ${bot.username}`);
     setupMessageHandlers(bot);
-    setupExpressRoutes(bot)
   });
   bot.on("end", () => {
     logger.log("Disconnected");
@@ -68,4 +67,6 @@ function initalizeBot() {
   return bot;
 }
 bot = initalizeBot();
-
+setTimeout(() => {
+  setupExpressRoutes(bot)
+},5000)
