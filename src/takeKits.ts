@@ -43,6 +43,7 @@ function getKitVector3 (kitName: string) {
            example of .env coordinate format: "6531,89,4535" */
         const [x,y,z] = position.split(",").map(Number) /* turns it into 3 values by splitting after every comma and turns 
         them into numbers. */
+        logger.logDebug(`here at the splitting`)
         return new Vec3(x,y,z) // converts into Vec3 for usage
     } else {
         logger.warn(`Could not find the kit ${kitEnvName}.`)
@@ -57,13 +58,15 @@ export async function takeKits(kit: string, quantity: number, bot: Bot) {
       logger.log(`Kit not found.`)
     }
     const chestBlock = bot.blockAt(chestPosition)
+    logger.logDebug(`here at blockAt`)
     if (!chestBlock) {
         logger.error(`No block found at ${chestPosition}`)
         return;
     } /* Important error handling (im putting this here because it has slipped through in last version of the bot,
     thank you TypeScript for some excellent analysis.) */
+    logger.logDebug(`here at the opening`)
     const chestWindow = await bot.openContainer(chestBlock)
-
+    logger.logDebug(`here at the taking`)
     /* Go through each slot in the chest and if it has a shulker box, then withdraw() it (put it in bots'inventory) */
     for (const slot of chestWindow.containerItems()) {
         if (slot && shulkerBoxTypes.includes(slot.name)) {
