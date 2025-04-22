@@ -37,7 +37,7 @@ function getKitVector3 (kitName: string) {
     const kitEnvName = `${kitName.toUpperCase()}_KIT_CHEST_POS` /* Convert kitname to uppercase and add _KIT_CHEST_POS suffix */
 
     const position = process.env[kitEnvName] /* get the XYZ value from .ENV file */
-
+    logger.logDebug(position)
     if (position) {
         /* since the xyz positions is stored in a single string, we have to split it 
            example of .env coordinate format: "6531,89,4535" */
@@ -53,6 +53,9 @@ function getKitVector3 (kitName: string) {
 export async function takeKits(kit: string, quantity: number, bot: Bot) {
     logger.log(`Bot taking ${quantity} ${kit} kits.`)
     const chestPosition = getKitVector3(kit)
+    if (chestPosition == new Vec3(0,0,0)) {
+      logger.log(`Kit not found.`)
+    }
     const chestBlock = bot.blockAt(chestPosition)
     if (!chestBlock) {
         logger.error(`No block found at ${chestPosition}`)
