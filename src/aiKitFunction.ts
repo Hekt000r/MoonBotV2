@@ -6,6 +6,8 @@
 /* Imports */
 import Groq from "groq-sdk"
 
+require(`dotenv`).config()
+
 /* Variables */
 const groqApikey = process.env.GROQ_API_KEY
 const groq = new Groq({apiKey: groqApikey})
