@@ -55,7 +55,7 @@ function initalizeBot() {
       );
       setTimeout(() => {
         isRestarting = false;
-        initalizeBot;
+        initalizeBot();
       }, config.restartTimeout);
     } else {
       logger.log(`Reconnecting in ${config.reconnectTimeout / 1000} seconds. `);
